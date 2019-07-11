@@ -40,16 +40,22 @@ var server=app.listen(app.get('port'), function(){
 
 // Main
 app.get('/', function(req,res,next){
-    res.render('form');
-  });
+  res.render('index');
+});
+
+app.get('/doctor', function(req,res,next){
+  res.render('form');
+});
+
+app.get('/medicine', function(req,res,next){
+  res.render('medicine');
+});
 
 
-app.post("/addToDatabase", function(req, res, next){
+app.post('/addToDoctor', function(req, res, next){
     let ref = firestore.collection('Doctors').doc();
-    console.log(req.body.docName);
     let getDoc = ref.get()
   .then(doc => {
-    // console.log("Reached here Correct place");
     var item = {
         docName:req.body.docName,
         Spec: req.body.Spec,
@@ -59,15 +65,8 @@ app.post("/addToDatabase", function(req, res, next){
         email: req.body.mail,
         phone: req.body.phone,
         timing: req.body.timing,
-        title:req.body.title,
-        location : {
-            latitude : 54.2362732,
-            longitude : 23.7326615
-        }
+        title:req.body.title,    
     } 
-    // var item = {
-    //     docName : "Saurabh k"
-    // }
 
     ref.set(item).then(()=>{
         console.log("Data saved");
@@ -83,4 +82,35 @@ app.post("/addToDatabase", function(req, res, next){
   });
     
     res.redirect("/");
+});
+
+
+
+app.post('/addToMedicine', function(req, res, next){
+  let ref = firestore.collection('Medicine').doc();
+  let getDoc = ref.get()
+.then(doc => {
+  // console.log("Reached here Correct place");
+  var item = {
+      name : req.body.naam,
+      uses : req.body.uses,
+      sa : req.body.sa,
+      ce : req.body.price
+  } 
+
+
+  ref.set(item).then(()=>{
+      console.log("Data saved");
+  })
+  .catch(err =>
+      {
+          console.log("I dont know the problem ");
+      });
+})
+.catch(err=>{
+  console.log("Reached here..Incorrect place");
+
+});
+  
+  res.redirect("/");
 });
