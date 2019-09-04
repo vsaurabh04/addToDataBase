@@ -7,15 +7,7 @@ var firebase = require("firebase/app");
 require("firebase/firestore");
 require("firebase/database");
 
-var firebaseConfig = {
-    apiKey: "AIzaSyCWY5hULyXBoO8tm3VTj4M6hmXE9t4gX60",
-    authDomain: "projecthydra-88355.firebaseapp.com",
-    databaseURL: "https://projecthydra-88355.firebaseio.com",
-    projectId: "projecthydra-88355",
-    storageBucket: "projecthydra-88355.appspot.com",
-    messagingSenderId: "799269940014",
-    appId: "1:799269940014:web:b60c468cc110b707"
-  };
+
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
